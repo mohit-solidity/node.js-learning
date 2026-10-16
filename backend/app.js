@@ -17,7 +17,18 @@ const server = http.createServer((req,res)=>{
         if(req.url.startsWith("/users/") && req.method === "GET"){
             const url = new URL(req.url , `http://${req.headers.host}`);
             const name = url.searchParams.get("name");
-            res.end(`Data Is : ${name}`);
+            const email = url.searchParams.get("email");
+            const searchedData = data.filter((user)=>{
+                const nameMatch = name===null || user.name.toLowerCase() === name.toLowerCase();
+                const emailMatch = email===null || user.email.toLowerCase() === email.toLowerCase();
+                return nameMatch && emailMatch;
+            })
+            res.setHeader("content-type","application/json");
+            res.end(JSON.stringify({
+                name,
+                email,
+                searchedData
+            }));
             return;
         }
 })
