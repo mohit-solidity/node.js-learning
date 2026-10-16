@@ -1,22 +1,24 @@
 import http from "http";
+import data from "./data.json" with {type:"json"};
 
 const server = http.createServer((req,res)=>{
-    try{
         if(req.url==="/"){
-            res.end(`Server Is Running`);
+            res.end(`Main Page`);
             return;
         }
         if(req.url==="/about"){
             res.end(`About Section`);
             return;
         }
-        if(req.url==="/photo"){
-            res.end(`Your Photu`);
+        if(req.url === "/users" && req.method === "GET"){
+            res.statusCode = 200;
+            res.end(`Data : ${JSON.stringify(data)}`)
+        }
+        if(req.url.startsWith("/users/") && req.method === "GET"){
+            const url = new URL(req.url , `http://${req.headers.host}`);
+            const name = url.searchParams.get("name");
+            res.end(`Data Is : ${name}`);
             return;
         }
-    }catch(err){
-        res.end(`Error : ${err}`);
-        return;
-    }
 })
 server.listen(3000);

@@ -1,0 +1,102 @@
+[
+  {
+    "id": 1,
+    "name": "Aarav Sharma",
+    "email": "aarav.sharma@example.com"
+  },
+  {
+    "id": 2,
+    "name": "Priya Patel",
+    "email": "priya.patel@example.com"
+  },
+  {
+    "id": 3,
+    "name": "Rohan Verma",
+    "email": "rohan.verma@example.com"
+  },
+  {
+    "id": 4,
+    "name": "Ananya Gupta",
+    "email": "ananya.gupta@example.com"
+  },
+  {
+    "id": 5,
+    "name": "Vikram Singh",
+    "email": "vikram.singh@example.com"
+  },
+  {
+    "id": 6,
+    "name": "Neha Joshi",
+    "email": "neha.joshi@example.com"
+  },
+  {
+    "id": 7,
+    "name": "Kabir Mehta",
+    "email": "kabir.mehta@example.com"
+  },
+  {
+    "id": 8,
+    "name": "Diya Iyer",
+    "email": "diya.iyer@example.com"
+  },
+  {
+    "id": 9,
+    "name": "Arjun Nair",
+    "email": "arjun.nair@example.com"
+  },
+  {
+    "id": 10,
+    "name": "Kavya Reddy",
+    "email": "kavya.reddy@example.com"
+  },
+  {
+    "id": 11,
+    "name": "Aditya Rao",
+    "email": "aditya.rao@example.com"
+  },
+  {
+    "id": 12,
+    "name": "Pooja Das",
+    "email": "pooja.das@example.com"
+  },
+  {
+    "id": 13,
+    "name": "Rahul Malhotra",
+    "email": "rahul.malhotra@example.com"
+  },
+  {
+    "id": 14,
+    "name": "Sneha Kulkarni",
+    "email": "sneha.kulkarni@example.com"
+  },
+  {
+    "id": 15,
+    "name": "Amit Saxena",
+    "email": "amit.saxena@example.com"
+  },
+  {
+    "id": 16,
+    "name": "Tanvi Pillai",
+    "email": "tanvi.pillai@example.com"
+  },
+  {
+    "id": 17,
+    "name": "Manish Kumar",
+    "email": "manish.kumar@example.com"
+  },
+  {
+    "id": 18,
+    "name": "Ritu Sen",
+    "email": "ritu.sen@example.com"
+  },
+  {
+    "id": 19,
+    "name": "Siddharth Roy",
+    "email": "siddharth.roy@example.com"
+  },
+  {
+    "id": 20,
+    "name": "Meera Menon",
+    "email": "meera.menon@example.com"
+  }
+]
