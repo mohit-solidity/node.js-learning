@@ -2,6 +2,7 @@ import http from "http";
 import data from "./data.json" with {type:"json"};
 
 const server = http.createServer((req,res)=>{
+    const users = [];
         if(req.url==="/"){
             res.end(`Main Page`);
             return;
@@ -13,6 +14,41 @@ const server = http.createServer((req,res)=>{
         if(req.url === "/users" && req.method === "GET"){
             res.statusCode = 200;
             res.end(`Data : ${JSON.stringify(data)}`)
+        }
+        // POST 
+        if(req.url==="/users" && req.method==="POST"){
+            let body = "";
+
+            req.on("data", (chunks)=>{
+                body += chunks;
+            })
+            console.log(`Body : ${body}`);
+            
+
+            req.on("end",()=>{
+                try{
+                    const data = JSON.parse(body);
+                    console.log(`Data : ${JSON.stringify(data)}\nName : ${data.name}`);
+                    
+                    if(typeof data.name !== "string" || !data.name.trim()){
+                        req.statusCode = 400;
+                        return res.end(`Invalid Data`)
+                    }
+                    const user = {
+                        id: users.length +1,
+                        name: data.name.trim()
+                    }
+                    console.log(`User : ${JSON.stringify(user)}`);
+                    
+                    req.statusCode = 200;
+                    users.push(user);
+                    res.setHeader("content-type", "application/json")
+                    return res.end(`Data Here : ${JSON.stringify(user)}`);
+                }catch(err){
+                    req.statusCode = 400;
+                    return res.end(`Error : ${err}`);
+                }
+            })
         }
         if(req.url.startsWith("/users/") && req.method === "GET"){
             const url = new URL(req.url , `http://${req.headers.host}`);
@@ -32,4 +68,7 @@ const server = http.createServer((req,res)=>{
             return;
         }
 })
-server.listen(3000);
+server.listen(3000, ()=>{
+    console.log(`Server Running On LocalHost 3000`);
+    
+});
