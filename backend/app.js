@@ -15,41 +15,67 @@ const server = http.createServer((req,res)=>{
             res.statusCode = 200;
             res.end(`Data : ${JSON.stringify(data)}`)
         }
-        // POST 
+
         if(req.url==="/users" && req.method==="POST"){
             let body = "";
 
-            req.on("data", (chunks)=>{
-                body += chunks;
+            req.on("data",(chunk)=>{
+                body += chunk;
             })
-            console.log(`Body : ${body}`);
-            
-
             req.on("end",()=>{
                 try{
-                    const data = JSON.parse(body);
-                    console.log(`Data : ${JSON.stringify(data)}\nName : ${data.name}`);
+                    let data = JSON.parse(body);
+                    console.log(`Data : ${JSON.stringify(data)}`);
                     
-                    if(typeof data.name !== "string" || !data.name.trim()){
-                        req.statusCode = 400;
-                        return res.end(`Invalid Data`)
-                    }
                     const user = {
-                        id: users.length +1,
-                        name: data.name.trim()
+                        id: users.length + 1,
+                        name: data.name.trim(),
                     }
-                    console.log(`User : ${JSON.stringify(user)}`);
-                    
-                    req.statusCode = 200;
                     users.push(user);
-                    res.setHeader("content-type", "application/json")
-                    return res.end(`Data Here : ${JSON.stringify(user)}`);
+                    console.log(`In Parsing : ${JSON.parse(body)}`);
+                    
+                    console.log(`Users : ${JSON.stringify(users)}`);
+                    
+                    return res.end(`Data : ${JSON.stringify(users)}`)
                 }catch(err){
-                    req.statusCode = 400;
-                    return res.end(`Error : ${err}`);
+                    return res.end(`Error : ${err.message}`);
                 }
             })
         }
+        // // POST 
+        // if(req.url==="/users" && req.method==="POST"){
+        //     let body = "";
+
+        //     req.on("data", (chunks)=>{
+        //         body += chunks;
+        //     })
+        //     console.log(`Body : ${body}`);
+            
+        //     req.on("end",()=>{
+        //         try{
+        //             const data = JSON.parse(body);
+        //             console.log(`Data : ${JSON.stringify(data)}\nName : ${data.name}`);
+                    
+        //             if(typeof data.name !== "string" || !data.name.trim()){
+        //                 req.statusCode = 400;
+        //                 return res.end(`Invalid Data`)
+        //             }
+        //             const user = {
+        //                 id: users.length +1,
+        //                 name: data.name.trim()
+        //             }
+        //             console.log(`User : ${JSON.stringify(user)}`);
+                    
+        //             req.statusCode = 200;
+        //             users.push(user);
+        //             res.setHeader("content-type", "application/json")
+        //             return res.end(`Data Here : ${JSON.stringify(user)}`);
+        //         }catch(err){
+        //             req.statusCode = 400;
+        //             return res.end(`Error : ${err}`);
+        //         }
+        //     })
+        //}
         if(req.url.startsWith("/users/") && req.method === "GET"){
             const url = new URL(req.url , `http://${req.headers.host}`);
             const name = url.searchParams.get("name");
@@ -70,5 +96,4 @@ const server = http.createServer((req,res)=>{
 })
 server.listen(3000, ()=>{
     console.log(`Server Running On LocalHost 3000`);
-    
 });
